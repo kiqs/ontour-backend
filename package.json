@@ -51,6 +51,8 @@
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "socketio": "^1.0.0",
+    "socketio-jwt": "^4.5.0",
     "underscore": "^1.8.3",
     "whatwg-fetch": "^1.0.0"
   },

@@ -11,9 +11,11 @@ import * as provider from './provider';
 // Strategies
 import jwtStrategy from './strategies/jwt';
 import emailStrategy from './strategies/email';
+import localStrategy from './strategies/local';
 
 passport.use('jwt', jwtStrategy);
 passport.use('email', emailStrategy);
+passport.use('local', localStrategy);
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
@@ -42,6 +44,10 @@ export function isAuthenticated() {
 
 export function authEmail() {
   return passport.authenticate('email');
+}
+
+export function authLocal() {
+  return passport.authenticate('local');
 }
 
 // After autentication using one of the strategies, generate a JWT token

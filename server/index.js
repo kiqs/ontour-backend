@@ -4,7 +4,18 @@ import Koa from 'koa';
 
 import middleware from './middleware';
 import auth from './auth';
-import routes from './routes';
+import router from './routes';
+
+const app = new Koa();
+
+app.keys = ['secret'];
+
+app.use(middleware());
+app.use(auth());
+app.use(router.routes());
+app.use(ctx => ctx.status = 404);
+
+export default app;
 
 // const bodyParser = require('koa-bodyparser');
 // const session = require('koa-session')
@@ -14,15 +25,6 @@ import routes from './routes';
 // const err = require('./error');
 // const { routes, allowedMethods } = require('./routes/routes');
 // const securedRouter = require('./routes/secure-routes');
-
-const app = new Koa();
-
-app.keys = ['secret'];
-
-app.use(middleware());
-app.use(auth());
-app.use(routes());
-app.use(ctx => ctx.status = 404);
 
 // app.use(bodyParser());
 // app.use(session({}, app));
@@ -37,8 +39,6 @@ app.use(ctx => ctx.status = 404);
 // const server = http.createServer(app.callback()).listen(config.server.port, () => {
 //     console.log('%s listening at port %d', config.app.name, config.server.port);
 // });
-
-export default app;
 
 // module.exports = {
 //     closeServer() {
