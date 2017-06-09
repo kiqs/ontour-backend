@@ -45,7 +45,7 @@ router.get('/custom', async(ctx, next) => {
   })(ctx, next);
 });
 
-export default router;
+export default router.routes();
 
 // import importDir from 'import-dir';
 //

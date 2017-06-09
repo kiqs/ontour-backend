@@ -4,7 +4,7 @@ import Koa from 'koa';
 
 import middleware from './middleware';
 import auth from './auth';
-import router from './routes';
+import routes from './routes';
 
 const app = new Koa();
 
@@ -12,7 +12,7 @@ app.keys = ['secret'];
 
 app.use(middleware());
 app.use(auth());
-app.use(router.routes());
+app.use(routes);
 app.use(ctx => ctx.status = 404);
 
 export default app;
