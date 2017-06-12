@@ -48,21 +48,6 @@ router
     })(ctx, next)
   });
 
-  // app.use(route.get('/', function(ctx) {
-  //   ctx.type = 'html'
-  //   var body = fs.readFileSync('views/login.html', 'utf8')
-  //   ctx.body = body.replace('{csrfToken}', ctx.csrf)
-  // }))
-  //
-  // // Require authentication for now
-  // app.use(function(ctx, next) {
-  //   if (ctx.isAuthenticated()) {
-  //     return next()
-  //   } else {
-  //     ctx.redirect('/')
-  //   }
-  // })
-
 module.exports = {
   routes () {
     return router.routes()
