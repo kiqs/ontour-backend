@@ -22,10 +22,31 @@ passport.deserializeUser((id, done) => {
   User.findById(id, done);
 });
 
-const LocalStrategy = require('passport-local').Strategy;
-passport.use(new LocalStrategy((username, password, done) => {
-  User.findOne({ username: username, password: password }, done);
-}));
+// const LocalStrategy = require('passport-local').Strategy;
+// passport.use(new LocalStrategy((username, password, done) => {
+//   User.findOne({ username: username, password: password }, done);
+// }));
+
+// passport.use(new LocalStrategy({
+//     usernameField: 'email',
+//     passwordField: 'password',
+//     session: false
+//   },
+//   function (email, password, done) {
+//     console.log('sdf')
+//
+//     User.findOne({email}, (err, user) => {
+//       if (err) {
+//         return done(err);
+//       }
+//
+//       if (!user || !user.checkPassword(password)) {
+//         return done(null, false, {message: 'Нет такого пользователя или пароль неверен.'});
+//       }
+//       return done(null, user);
+//     });
+//   })
+// );
 
 const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
