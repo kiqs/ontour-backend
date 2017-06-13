@@ -7,6 +7,7 @@ import router from './router';
 
 router.post('/user', async(ctx, next) => {
   try {
+    console.log(ctx.request.body)
     ctx.body = await User.create(ctx.request.body);
   }
   catch (err) {

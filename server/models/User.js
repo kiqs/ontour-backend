@@ -6,11 +6,16 @@ import crypto from 'crypto';
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   username: {
     type: String,
     required: 'Please fill username',
+    unique: 'User with this username already exists'
+  },
+  email: {
+    type: String,
+    required: 'Please fill email',
     unique: 'User with this email already exists'
   },
   passwordHash: {
