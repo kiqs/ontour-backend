@@ -11,7 +11,7 @@ router.post('/user', async(ctx, next) => {
     ctx.body = await User.create(ctx.request.body);
   }
   catch (err) {
-    ctx.status = 400;
+    ctx.status = 200;
     ctx.body = err;
   }
 });

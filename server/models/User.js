@@ -2,6 +2,7 @@
 
 import mongoose from 'mongoose';
 import crypto from 'crypto';
+import uniqueValidator from 'mongoose-unique-validator';
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -38,6 +39,8 @@ const UserSchema = new mongoose.Schema({
     updatedAt: 'updatedAt',
   },
 });
+
+UserSchema.plugin(uniqueValidator);
 
 UserSchema.virtual('password').set(function (password) {
   this.salt = crypto.randomBytes(128).toString('base64');

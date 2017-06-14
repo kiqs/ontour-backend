@@ -43,6 +43,7 @@
     "koa-session": "^5.0.0",
     "moment": "^2.18.1",
     "mongoose": "^4.10.2",
+    "mongoose-unique-validator": "^1.0.5",
     "node-sass": "^3.4.2",
     "node-vibrant": "^3.0.0-alpha.2",
     "passport-custom": "^1.0.5",
