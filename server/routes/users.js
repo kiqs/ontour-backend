@@ -18,8 +18,16 @@ router.post('/user', async(ctx, next) => {
 
 router.post('/login', async(ctx, next) => {
   await passport.authenticate('local', function (err, user) {
-    if (user == false) {
-      ctx.body = "Login failed";
+    console.log(2, err, user)
+
+    if (user === false || user === undefined) {
+      ctx.body = {
+        errors: {
+          fail: {
+            message: "Login failed"
+          }
+        }
+      };
     } else {
       const payload = {
         id: user.id,

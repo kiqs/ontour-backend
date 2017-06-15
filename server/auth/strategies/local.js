@@ -4,22 +4,26 @@ import User from '../../models/User';
 import { Strategy as LocalStrategy } from 'passport-local';
 
 export default new LocalStrategy({
-    nameField: 'name',
-    usernameField: 'username',
-    passwordField: 'password',
-    session: false
-  },
-  function (username, password, done) {
-    User.findOne({username}, (err, user) => {
-      if (err) {
-        return done(err);
-      }
+  usernameField: 'username',
+  passwordField: 'password',
+  session: false
+}, localCallback);
 
-      if (!user || !user.checkPassword(password)) {
-        return done(null, false, {message: 'Нет такого пользователя или пароль неверен.'});
-      }
+async function localCallback(username, password, done) {
+  let usernameExists = await User.findOne({username: username});
+  let emailExists = await User.findOne({email: username});
 
-      return done(null, user);
-    });
+  if (!usernameExists && !emailExists) {
+    return done('Invalid username or email');
   }
-);
+
+  if (usernameExists && !usernameExists.checkPassword(password)) {
+    return done(null, false, {message: 'Invalid password'});
+  }
+
+  if (emailExists && !emailExists.checkPassword(password)) {
+    return done(null, false, {message: 'Invalid password'});
+  }
+
+  return done(null, usernameExists || emailExists);
+}
