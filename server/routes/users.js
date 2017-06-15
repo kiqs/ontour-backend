@@ -7,7 +7,6 @@ import router from './router';
 
 router.post('/user', async(ctx, next) => {
   try {
-    console.log(ctx.request.body)
     ctx.body = await User.create(ctx.request.body);
   }
   catch (err) {
@@ -18,8 +17,6 @@ router.post('/user', async(ctx, next) => {
 
 router.post('/login', async(ctx, next) => {
   await passport.authenticate('local', function (err, user) {
-    console.log(2, err, user)
-
     if (user === false || user === undefined) {
       ctx.body = {
         errors: {
