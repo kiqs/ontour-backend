@@ -26,6 +26,7 @@
     "babel-preset-stage-3": "^6.17.0",
     "babel-runtime": "^6.23.0",
     "crypto": "0.0.3",
+    "disconnect": "^1.2.0",
     "graphql": "^0.10.1",
     "http": "0.0.0",
     "import-dir": "0.0.1",
