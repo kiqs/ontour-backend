@@ -7,9 +7,14 @@ const Discogs = disconnect.Client;
 const DISCOGS_TOKEN = 'zVJtjArUWSqaiupSkWTpXZoqcKbUyItkoUgutimC';
 const db = new Discogs({userToken: DISCOGS_TOKEN}).database();
 
-router.get('/releases/:artist', async(ctx, next) => {
+router.post('/releases', async(ctx, next) => {
   try {
-    let releases = await db.search(ctx.params.artist, {artist: ctx.params.artist});
+    let releases = await db.search(ctx.params.artist, {
+      type: 'release',
+      artist: ctx.request.body.artist,
+      format: 'album',
+      page: ctx.request.body.page
+    });
     ctx.body = releases;
   }
   catch (err) {
