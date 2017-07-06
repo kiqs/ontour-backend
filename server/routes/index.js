@@ -1,10 +1,10 @@
 'use strict';
 
 import compose from 'koa-compose';
-import eventsRoutes from './events';
-import usersRoutes from './users';
-import artistsRoutes from './artists';
-import releasesRoutes from './releases';
+import eventsRoutes from './api/events';
+import usersRoutes from './api/users';
+import artistsRoutes from './api/artists';
+import releasesRoutes from './api/releases';
 
 export default function routes() {
   return compose([usersRoutes, eventsRoutes, artistsRoutes, releasesRoutes]);

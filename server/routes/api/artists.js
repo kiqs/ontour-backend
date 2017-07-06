@@ -1,9 +1,9 @@
 'use strict';
 
-import Artist from '../models/Artist';
-import router from './router';
+import Artist from '../../models/Artist';
+import router from '../router';
 
-router.post('/artist', async(ctx, next) => {
+router.post('/artists', async(ctx, next) => {
   try {
     ctx.body = await Artist.create(ctx.request.body);
   }

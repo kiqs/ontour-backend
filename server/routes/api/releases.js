@@ -1,10 +1,10 @@
 'use strict';
 
-import router from './router';
+import router from '../router';
 import disconnect from 'disconnect';
+import { DISCOGS_TOKEN } from '../../constants/releases';
 
 const Discogs = disconnect.Client;
-const DISCOGS_TOKEN = 'zVJtjArUWSqaiupSkWTpXZoqcKbUyItkoUgutimC';
 const db = new Discogs({userToken: DISCOGS_TOKEN}).database();
 
 router.post('/releases', async(ctx, next) => {

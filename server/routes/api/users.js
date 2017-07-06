@@ -2,10 +2,10 @@
 
 import passport from 'koa-passport';
 import jwt from 'jsonwebtoken';
-import User from '../models/User';
-import router from './router';
+import User from '../../models/User';
+import router from '../router';
 
-router.post('/user', async(ctx, next) => {
+router.post('/users', async(ctx, next) => {
   try {
     ctx.body = await User.create(ctx.request.body);
   }
@@ -37,6 +37,7 @@ router.post('/login', async(ctx, next) => {
 
       ctx.body = {
         user: {
+          id: user.id,
           name: user.name,
           username: user.username
         },
