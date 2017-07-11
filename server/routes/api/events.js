@@ -5,9 +5,29 @@ import Event from '../../models/Event';
 import router from '../router';
 import * as constants from '../../constants/api';
 
-router.get('/events', async(ctx, next) => {
+router.post('/upcoming-events', async(ctx, next) => {
   try {
-    ctx.body = await Event.find();
+    const res = await superagent.get(ctx.request.body.link)
+      .query({ min_date: ctx.request.body.min_date })
+      .query({ max_date: ctx.request.body.max_date })
+      .query({ apikey: constants.SK_KEY })
+      .query({ page: ctx.request.body.page })
+      .query({ per_page: ctx.request.body.per_page })
+      .withCredentials();
+
+    let results = JSON.parse(res.text);
+
+    const resLikes = await Event.find({user_id: ctx.request.body.user_id });
+
+    results.resultsPage.results.event.forEach(event => {
+      resLikes.forEach(like => {
+        if (like.event_id == event.id) {
+          event.like = true;
+        }
+      });
+    });
+
+    ctx.body = results.resultsPage;
   }
   catch (err) {
     ctx.status = 400;
@@ -15,12 +35,9 @@ router.get('/events', async(ctx, next) => {
   }
 });
 
-router.post('/upcoming-events', async(ctx, next) => {
+router.get('/events', async(ctx, next) => {
   try {
-    let url = `${ctx.request.body.link}?apikey=${constants.SK_KEY}&page=${ctx.request.body.page}&per_page=${ctx.request.body.per_page}`;
-    let res = await superagent.get(`${url}`).withCredentials();
-    let results = JSON.parse(res.text);
-    ctx.body = results.resultsPage;
+    ctx.body = await Event.find();
   }
   catch (err) {
     ctx.status = 400;
