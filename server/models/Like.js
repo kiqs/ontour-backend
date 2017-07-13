@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-const EventSchema = new mongoose.Schema({
+const LikeSchema = new mongoose.Schema({
   event_id: {
     type: Number,
     required: true,
@@ -25,4 +25,4 @@ const EventSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model('Event', EventSchema);
+export default mongoose.model('Like', LikeSchema);
