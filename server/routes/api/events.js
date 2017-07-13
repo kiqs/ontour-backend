@@ -4,6 +4,7 @@ import superagent from 'superagent';
 import Event from '../../models/Event';
 import router from '../router';
 import * as constants from '../../constants/api';
+import { authLocal } from '../../auth';
 
 router.post('/upcoming-events', async(ctx, next) => {
   try {
@@ -17,7 +18,7 @@ router.post('/upcoming-events', async(ctx, next) => {
 
     let results = JSON.parse(res.text);
 
-    const resLikes = await Event.find({user_id: ctx.request.body.user_id });
+    const resLikes = await Event.find({user_id: ctx.request.body.user_id, like: true});
 
     results.resultsPage.results.event.forEach(event => {
       resLikes.forEach(like => {
@@ -47,6 +48,11 @@ router.get('/events', async(ctx, next) => {
 
 router.post('/events', async(ctx, next) => {
   try {
+    if (!ctx.request.body.like) {
+      ctx.body = await Event.remove({event_id: ctx.request.body.event_id});
+      return;
+    }
+
     ctx.body = await Event.create(ctx.request.body);
   }
   catch (err) {

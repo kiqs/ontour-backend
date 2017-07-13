@@ -12,6 +12,11 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
     index: true
+  },
+  like: {
+    type: Boolean,
+    required: true,
+    index: false
   }
 }, {
   timestamps: {
