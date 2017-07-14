@@ -4,25 +4,7 @@ import superagent from 'superagent';
 import Like from '../../models/Like';
 import router from '../router';
 import * as constants from '../../constants/api';
-
-async function addEventLikesInfo(results, resLikes) {
-  let newEvents = await Promise.all(results.resultsPage.results.event.map(async event => {
-    const likesCount = await Like.count({event_id: event.id});
-    event.likesCount = likesCount;
-    event.like = false;
-
-    resLikes.forEach(like => {
-      if (like.event_id == event.id) {
-        event.like = true;
-      }
-    });
-
-    return event;
-  }));
-
-  results.resultsPage.results.event = newEvents;
-  return results;
-}
+import * as LikeController from '../../controllers/LikeController';
 
 router.post('/upcoming-events', async(ctx, next) => {
   try {
@@ -37,7 +19,7 @@ router.post('/upcoming-events', async(ctx, next) => {
 
     let results = JSON.parse(res.text);
     const resLikes = await Like.find({user_id: ctx.request.body.user_id, like: true});
-    const newRes = await addEventLikesInfo(results, resLikes);
+    const newRes = await LikeController.addEventLikesInfo(results, resLikes);
     ctx.body = newRes.resultsPage;
   }
   catch (err) {
