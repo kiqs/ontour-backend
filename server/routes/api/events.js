@@ -27,6 +27,7 @@ async function addEventLikesInfo(results, resLikes) {
 router.post('/upcoming-events', async(ctx, next) => {
   try {
     const res = await superagent.get(ctx.request.body.link)
+      .query({ location: ctx.request.body.location })
       .query({ min_date: ctx.request.body.min_date })
       .query({ max_date: ctx.request.body.max_date })
       .query({ apikey: constants.SK_KEY })
