@@ -2,28 +2,14 @@
 
 import router from '../router';
 import Like from '../../models/Like';
-import Event from '../../models/Event';
-import Venue from '../../models/Venue';
 import * as EventController from '../../controllers/EventController';
 import * as VenueController from '../../controllers/VenueController';
 import * as LikeController from '../../controllers/LikeController';
 
-async function collectLikesInfo(likes) {
-  let newLikes = await Promise.all(likes.map(async like => {
-    let eventInfo = await Event.find({id: like.event_id});
-    eventInfo = eventInfo[0];
-    let venueInfo = await Venue.find({id: eventInfo.venue_id});
-    venueInfo = venueInfo[0];
-    like = {like, eventInfo, venueInfo};
-    return like;
-  }));
-  return newLikes;
-}
-
 router.get('/likes', async(ctx, next) => {
   try {
     let likes = await Like.find();
-    let collectedLikes = await collectLikesInfo(likes);
+    let collectedLikes = await LikeController.collectLikesInfo(likes);
     ctx.body = collectedLikes;
   }
   catch (err) {
