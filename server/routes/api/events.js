@@ -20,7 +20,7 @@ router.post('/upcoming-events', async(ctx, next) => {
     let results = JSON.parse(res.text);
     const resLikes = await Like.find({user_id: ctx.request.body.user_id, like: true});
     const newRes = await LikeController.addEventLikesInfo(results, resLikes);
-    ctx.body = newRes.resultsPage;
+    ctx.body = results.resultsPage;
   }
   catch (err) {
     ctx.status = 400;

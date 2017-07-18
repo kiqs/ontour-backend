@@ -4,10 +4,10 @@ import 'babel-polyfill';
 import 'isomorphic-fetch';
 import app from './server/index';
 import { connectDatabase } from './server/db';
-import { development, test, production } from './server/db/config';
+import { mlab, development, test, production } from './server/db/config';
 
 const port = process.env.PORT || 4000;
-const databaseConfig = (process.env.NODE_ENV == 'production' ) ? production : development;
+const databaseConfig = mlab; //(process.env.NODE_ENV == 'production' ) ? production : development;
 
 (async() => {
   try {
