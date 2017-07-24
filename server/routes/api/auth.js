@@ -4,7 +4,6 @@ import {
   authEmail,
   generateToken,
 } from '../../auth';
-import { ERROR, OK } from '../../consts';
 import User from '../../models/User';
 
 export default (router) => {
@@ -23,7 +22,6 @@ export default (router) => {
 async function register(ctx, next) {
   const { name, email, password } = ctx.request.body;
 
-  // TODO - improve validation
   if (name && email && password) {
     let user = await User.findOne({email});
 
@@ -32,8 +30,6 @@ async function register(ctx, next) {
         name,
         email,
       });
-
-      // TODO handle password
 
       await user.save();
 
