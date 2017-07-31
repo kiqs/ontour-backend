@@ -3,11 +3,11 @@
 import Event from '../models/Event';
 
 export async function createEvent(event) {
-  const eventRes = await Event.find({id: event.id});
+  const eventRes = await Event.find({_id: event.id});
   if (eventRes.length) return;
 
   const eventData = {
-    id: event.id,
+    _id: event.id,
     name: event.displayName,
     location: event.location.city,
     lat: event.location.lat,

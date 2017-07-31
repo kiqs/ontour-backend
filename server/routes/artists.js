@@ -1,7 +1,7 @@
 'use strict';
 
-import Artist from '../../models/Artist';
-import router from '../router';
+import Artist from '../models/Artist';
+import router from './router';
 
 router.post('/artists', async(ctx, next) => {
   try {

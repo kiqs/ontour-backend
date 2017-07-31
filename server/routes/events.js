@@ -1,10 +1,10 @@
 'use strict';
 
 import superagent from 'superagent';
-import Like from '../../models/Like';
-import router from '../router';
-import * as constants from '../../constants/api';
-import * as LikeController from '../../controllers/LikeController';
+import Like from '../models/Like';
+import router from './router';
+import * as constants from '../constants/api';
+import * as LikeController from '../controllers/LikeController';
 
 router.post('/upcoming-events', async(ctx, next) => {
   try {

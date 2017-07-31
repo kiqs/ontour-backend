@@ -4,7 +4,11 @@ import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 const VenueSchema = new mongoose.Schema({
-  id: {
+  _creator: {
+    type: Number,
+    ref: 'Event'
+  },
+  _id: {
     type: Number,
     required: true,
     index: true,

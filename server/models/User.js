@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
   },
   google_id: {
     type: String,
-  },
+  }
 }, {
   timestamps: {
     createdAt: 'createdAt',

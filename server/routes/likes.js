@@ -1,10 +1,10 @@
 'use strict';
 
-import router from '../router';
-import Like from '../../models/Like';
-import * as EventController from '../../controllers/EventController';
-import * as VenueController from '../../controllers/VenueController';
-import * as LikeController from '../../controllers/LikeController';
+import router from './router';
+import Like from '../models/Like';
+import * as EventController from '../controllers/EventController';
+import * as VenueController from '../controllers/VenueController';
+import * as LikeController from '../controllers/LikeController';
 
 router.get('/likes', async(ctx, next) => {
   try {

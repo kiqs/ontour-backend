@@ -1,8 +1,13 @@
 'use strict';
 
 import mongoose from 'mongoose';
+import uniqueValidator from 'mongoose-unique-validator';
 
 const LikeSchema = new mongoose.Schema({
+  _creator: {
+    type: Number,
+    ref: 'User'
+  },
   event_id: {
     type: Number,
     required: true,
@@ -17,6 +22,10 @@ const LikeSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     index: false
+  },
+  event: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Event'
   }
 }, {
   timestamps: {
@@ -24,5 +33,7 @@ const LikeSchema = new mongoose.Schema({
     updatedAt: 'updatedAt',
   }
 });
+
+LikeSchema.plugin(uniqueValidator);
 
 export default mongoose.model('Like', LikeSchema);

@@ -31,8 +31,7 @@ export async function collectLikesInfo(likes) {
     eventInfo = eventInfo[0];
     let venueInfo = await Venue.find({id: eventInfo.venue_id});
     venueInfo = venueInfo[0];
-    like = {like, eventInfo, venueInfo};
-    return like;
+    return {like, eventInfo, venueInfo};
   }));
   return newLikes;
 }

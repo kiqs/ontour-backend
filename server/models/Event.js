@@ -4,7 +4,11 @@ import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 const EventSchema = new mongoose.Schema({
-  id: {
+  _creator: {
+    type: Number,
+    ref: 'Like'
+  },
+  _id: {
     type: Number,
     required: true,
     index: true,
@@ -33,6 +37,10 @@ const EventSchema = new mongoose.Schema({
   },
   venue_id: {
     type: Number
+  },
+  venue: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Venue'
   }
 }, {
   timestamps: {

@@ -7,7 +7,7 @@ import { connectDatabase } from './server/db';
 import { mlab, development, test, production } from './server/db/config';
 
 const port = process.env.PORT || 4000;
-const databaseConfig = mlab; //(process.env.NODE_ENV == 'production' ) ? production : development;
+const databaseConfig = (process.env.NODE_ENV == 'production' ) ? production : development;
 
 (async() => {
   try {

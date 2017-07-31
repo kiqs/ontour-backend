@@ -7,13 +7,13 @@ export async function createVenue(event) {
 
   if (!venue.id) return;
 
-  const venueRes = await Venue.find({id: venue.id});
+  const venueRes = await Venue.find({_id: venue.id});
   if (venueRes.length) return;
 
   const { metroArea } = venue;
 
   const venueData = {
-    id: venue.id,
+    _id: venue.id,
     name: venue.displayName,
     country: metroArea.country ? metroArea.country.displayName : null,
     city: metroArea.displayName,

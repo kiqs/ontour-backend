@@ -2,12 +2,20 @@
 
 import passport from 'koa-passport';
 import jwt from 'jsonwebtoken';
-import User from '../../models/User';
-import router from '../router';
+import User from '../models/User';
+import router from './router';
+import * as UserController from '../controllers/UserController';
 
 router.post('/users', async(ctx, next) => {
   try {
-    ctx.body = await User.create(ctx.request.body);
+    let res = await UserController.register(ctx.request.body);
+    ctx.status = 200;
+
+    if (res.status === 'error') {
+      ctx.body = { errors: { fail: { message: res.message } } };
+    } else {
+      ctx.body = res;
+    }
   }
   catch (err) {
     ctx.status = 200;

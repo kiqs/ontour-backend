@@ -1,6 +1,6 @@
 import { graphql } from 'graphql';
-import { renderGraphiQL } from '../../graphql/util';
-import { schema, graphiql } from '../../graphql';
+import { renderGraphiQL } from '../graphql/util';
+import { schema, graphiql } from '../graphql';
 
 function accepts(ctx, type) {
   return ctx.headers && ctx.headers.accept && ctx.headers.accept.includes(type);

@@ -1,7 +1,7 @@
 'use strict';
 
-import User from '../../models/User';
-import { isAuthenticated } from '../../auth';
+import User from '../models/User';
+import { isAuthenticated } from '../auth';
 
 export default (router) => {
   router
