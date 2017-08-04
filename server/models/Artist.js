@@ -5,20 +5,19 @@ import mongoose from 'mongoose';
 const ArtistSchema = new mongoose.Schema({
   id: {
     type: Number,
-    required: true,
-    index: true,
+    required: true
   },
   title: {
     type: String,
-    required: false,
+    required: false
   },
   date: {
     type: Date,
-    required: false,
+    required: false
   },
   performers: {
     type: String,
-    required: false,
+    required: false
   }
 }, {
   timestamps: {

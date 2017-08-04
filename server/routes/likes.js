@@ -8,9 +8,8 @@ import * as LikeController from '../controllers/LikeController';
 
 router.get('/likes', async(ctx, next) => {
   try {
-    let likes = await Like.find();
-    let collectedLikes = await LikeController.collectLikesInfo(likes);
-    ctx.body = collectedLikes;
+    let likes = await Like.find().populate('_event');
+    ctx.body = likes;
   }
   catch (err) {
     ctx.status = 400;
@@ -27,9 +26,9 @@ router.post('/likes', async(ctx, next) => {
       return;
     }
 
-    const eventRes = await EventController.createEvent(event);
     const venueRes = await VenueController.createVenue(event);
-    const likeRes = await LikeController.createLike(event_id, user_id, like);
+    const eventRes = await EventController.createEvent(venueRes._id, event);
+    const likeRes = await LikeController.createLike(eventRes._id, event_id, user_id, like);
     ctx.body = {eventRes, venueRes, likeRes};
   }
   catch (err) {

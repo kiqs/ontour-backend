@@ -4,31 +4,16 @@ import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 const VenueSchema = new mongoose.Schema({
-  _creator: {
+  id: Number,
+  name: String,
+  country: String,
+  city: String,
+  state: String,
+  uri: String,
+  events: [{
     type: Number,
     ref: 'Event'
-  },
-  _id: {
-    type: Number,
-    required: true,
-    index: true,
-    unique: true
-  },
-  name: {
-    type: String
-  },
-  country: {
-    type: String
-  },
-  city: {
-    type: String
-  },
-  state: {
-    type: String
-  },
-  uri: {
-    type: String
-  }
+  }]
 }, {
   timestamps: {
     createdAt: 'createdAt',

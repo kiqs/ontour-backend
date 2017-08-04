@@ -7,7 +7,7 @@ import uniqueValidator from 'mongoose-unique-validator';
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: false,
+    required: false
   },
   username: {
     type: String,
@@ -24,15 +24,13 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   salt: String,
-  facebook_id: {
-    type: String,
-  },
-  twitter_id: {
-    type: String,
-  },
-  google_id: {
-    type: String,
-  }
+  facebook_id: String,
+  twitter_id: String,
+  google_id: String,
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Like'
+  }]
 }, {
   timestamps: {
     createdAt: 'createdAt',
